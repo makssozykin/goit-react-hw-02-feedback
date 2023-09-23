@@ -27,6 +27,11 @@ export class App extends Component {
     if (totalFeedback > 0) return Math.round((good / totalFeedback) * 100);
     return 0;
   };
+  getRandomHexColor = () => {
+    return `#${Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, 0)}`;
+  };
 
   render() {
     const { good, neutral, bad } = this.state;
@@ -36,7 +41,16 @@ export class App extends Component {
       this.countPositiveFeedbackPercentage(totalFeedback);
 
     return (
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+          backgroundColor: this.getRandomHexColor(),
+        }}
+      >
         <Section title="Please leave feedback">
           <FeedbackOptions
             options={Object.keys(this.state)}
